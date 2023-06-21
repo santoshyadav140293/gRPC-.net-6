@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService1.Protos";
+
+package MarketWatch;
+
+
+// The greeting service definition.
+service MarketWatchDataServices {
+  // Sends a greeting
+  rpc GetScripDetals (ScripDetailsRequest) returns (ScripDetailsResponse); //simple request and response 
+  rpc GetScripDetailsStream (ScripDetailsRequest) returns (stream ScripDetailsResponse);
+
+  rpc GetLoginDetails (LoginRequest) returns (LoginResponse);
+  rpc GetScripBroadcast(ScripBroadcastRequest) returns (stream RealTimeMarketDataResponse);
+  rpc GetScripBinanceBroadcast(ScripBroadcastReq) returns (stream ScripBroadcastResponse);
+  //rpc AddUser(UserDetails) returns (UserDetailsResponse);
+}
+
+// The request message containing the user's name.
+message ScripDetailsRequest
+{
+	string Symbol =1;
+}
+
+message ScripDetailsResponse
+{
+	string Symbol =1;
+	double Price=2;
+	double Volume=3;
+}
+message LoginRequest
+{
+	string LoginId= 1;
+	string Password =2 ;
+}
+
+message LoginResponse
+{
+	string status=1;
+}
+
+message ScripBroadcastRequest
+{
+	string message=1;
+}
+
+message RealTimeMarketDataResponse
+{
+  string eventTime = 1;
+  int32 eventType =2;
+  string symbol =3;
+  string priceChangePer=4;
+  string priceChange=5;
+  string weightedAveragePrice=6;
+  string firstTrade=7;
+  string closeTime=8;
+  string quoteVolume=9;
+  string bidQuantity=10;
+  string bidPrice=11;
+  string askQuantity = 12;
+  string askPrice =13;
+  string openTime =14;
+  string highPrice = 15;
+  string lastTradeId = 16;
+  string baseVolume =17;
+  string lastQuantity =18;
+  string lastPrice =19;
+  int32 openPrice =20;
+  int32 firstTradeId =21;
+  int32 lowPrice =22;
+  int32 totalTrades = 23;
+}
+
+message ScripBroadcastReq
+{
+	string message=1;
+}
+
+message ScripBroadcastResponse
+{
+	string message=1;
+}
